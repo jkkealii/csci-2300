@@ -1,7 +1,3 @@
-// Driver.java
-// Tutorial for XML Parsing using DOM
-
-package xmlparsingtutorial;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,13 +12,13 @@ import org.xml.sax.SAXException;
 public class Driver {
 
 	public static void main(String argv[]) throws SAXException, IOException, ParserConfigurationException {
-		File xmlFile = new File("sample.xml");
+		File xmlFile = new File("sample.xml"); // needs to prompt user
+		Handler handler = new Handler();
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(xmlFile);
 		document.getDocumentElement().normalize();
-		Handler.handleChannelTag(document);
-		
+		handler.handleChannelTag(document);
 	}
 	
 }
