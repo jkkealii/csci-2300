@@ -1,4 +1,3 @@
-package xmlparsingtutorial;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -7,6 +6,27 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Handler {
+
+	public Handler () {
+		
+	}
+
+	// public static int getAppearancesOf (String persona) {
+	// 	int appearances = 0;
+
+	// }
+
+	// public static int getActNumberOf (String speaker) {
+
+	// }
+
+	// public static String searchFragment (String fragment) {
+
+	// }
+
+	// public static void replaceWith (String alt) {
+
+	// }
 
 	public static void handleChannelTag(Document document) {
 		System.out.println("<" + document.getDocumentElement().getNodeName() + ">");
