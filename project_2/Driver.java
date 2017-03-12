@@ -27,7 +27,8 @@ public class Driver {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(xmlFile);
-		document.getDocumentElement().normalize();
+		Element rootElement = document.getDocumentElement().normalize();
+		
 		handler.handleChannelTag(document);
 	}
 	
