@@ -9,7 +9,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import java.util.Scanner
+import java.util.Scanner;
+
 public class Driver {
 
 	public static void main(String argv[]) throws SAXException, IOException, ParserConfigurationException {
@@ -29,7 +30,28 @@ public class Driver {
 		Document document = documentBuilder.parse(xmlFile);
 		Element rootElement = document.getDocumentElement().normalize();
 		
-		handler.handleChannelTag(document);
+		System.out.println("Type the corresponding letter for the desired function:");
+		System.out.println("Calculate number of PERSONA: P");
+		System.out.println("Calculate number of times SPEAKER acts: S");
+		System.out.println("Search/Replace fragement: F");
+
+		String function = input.nextLine();
+		if (function == 'P' || function == 'p') {
+			System.out.println("Number of total PERSONA: " + handler.getPersonaTotal(rootElement));
+		} else if (function == 'S' || function == 's') {
+			System.out.println("Enter SPEAKER name, press ENTER for default (HAMLET)");
+			String speaker = input.nextLine();
+			if (speaker == "") {
+				System.out.println("SPEAKER [HAMLET] appears: " + handler.getActNumberOf(rootElement) + " times.");
+			} else {
+				System.out.println("SPEAKER [" + speaker + "] appears: " +handler.getActNumberOf(rootElement, speaker) + " times.");
+			}
+		} else if (function == 'F' || function == 'f') {
+			System.out.println("Enter fragment to search:");
+			String fragment = input.nextLine();
+			handler.searchFragment(document, fragment);
+		}
+
 	}
 	
 }
