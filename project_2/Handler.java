@@ -1,3 +1,10 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,22 +18,76 @@ public class Handler {
 		
 	}
 
-	// public static int getAppearancesOf (String persona) {
-	// 	int appearances = 0;
+	public static int getPersonaTotal (Element root) {
+		NodeList personaList = root.getElementsByTagName("PERSONA");
+		return personaList.getLength();
+	}
 
-	// }
+	public static int getActNumberOf (Element root, String speaker) {
+		String speaker = speaker.toUpperCase();
+		NodeList speakerList = root.getElementsByTagName("SPEAKER");
+		int actNumber = 0;
+		Element child;
+		for (int i = 0; i < speakerList.getLength(); i++) {
+			child = (Element) speakerList.item(i);
+			if (getString("SPEAKER", child) == speaker) {
+				actNumber++;
+			}
+		}
+		return actNumber.getLength();
+	}
 
-	// public static int getActNumberOf (String speaker) {
+	public static int getActNumberOf (Element root) { // default speaker is hamlet
+		String speaker = "HAMLET";
+		NodeList speakerList = root.getElementsByTagName(speaker);
+		int actNumber = 0;
+		Element child;
+		for (int i = 0; i < speakerList.getLength(); i++) {
+			child = (Element) speakerList.item(i);
+			if (getString("SPEAKER", child) == speaker) {
+				actNumber++;
+			}
+		}
+		return actNumber.getLength();
+	}
 
-	// }
+	public static String searchFragment (Document doc, String fragment) {
+		try {
+            XPathFactory xFactory = XPathFactory.newInstance();
+            XPath xPath = xFactory.newXPath();
+            XPathExpression exp = xPath.compile("/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), " + fragment + ")]");
 
-	// public static String searchFragment (String fragment) {
+            NodeList nl = (NodeList)exp.evaluate(doc.getFirstChild(), XPathConstants.NODESET);
+            for (int index = 0; index < nl.getLength(); index++) {
+            	System.out.println("The fragment has been found in the following sentence:");
+                Node node = nl.item(index);
+                System.out.println(node.getTextContent());
+            }
+            System.out.println("Search performed in " + time + " seconds");
+            System.out.println("Do you want to replace it? (Y/N)");
 
-	// }
+        } catch (Exception ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Sorry, fragment not found. Search performed in " + time + " seconds")
+        }
+	}
 
 	// public static void replaceWith (String alt) {
 
 	// }
+
+	protected String getString (String tagName, Element root) {
+        NodeList list = element.getElementsByTagName(tagName);
+        if (list != null && list.getLength() > 0) {
+            NodeList subList = list.item(0).getChildNodes();
+
+            if (subList != null && subList.getLength() > 0) {
+                return subList.item(0).getNodeValue();
+            }
+        }
+
+        return null;
+    }
 
 	public static void handleChannelTag(Document document) {
 		System.out.println("<" + document.getDocumentElement().getNodeName() + ">");
