@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel>
+	<name>SLU Library</name>
+	<topic>
+		<name>JAVA language </name>
+		<tutorial>Intro to Java 2</tutorial>
+		<tutorial>Beginning Java for Dummies</tutorial>
+	</topic>
+	<topic>
+		<name>Object Oriented Design</name>
+		<tutorial>Objed Oriented Design and Patterns</tutorial>
+		<tutorial>Object Oriented Software Construction</tutorial>
+	</topic>
+	<topic>
+		<name>XML</name>
+		<tutorial>Beginning XML</tutorial>
+	</topic>
+</channel>
