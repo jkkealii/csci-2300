@@ -1,22 +1,26 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
+import java.util.regex.*;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.xpath.*;
+
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.xml.sax.SAXException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NameList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import java.util.Scanner;
 
@@ -31,35 +35,24 @@ public class Handler {
 		return personaList.getLength();
 	}
 
-	public static int getActNumberOf (Element root, String speaker) {
-		String speaker = speaker.toUpperCase();
+	public static int getActNumberOf (Element root, String character) {
+		String speaker = character;
 		NodeList speakerList = root.getElementsByTagName("SPEAKER");
 		int actNumber = 0;
-		Element child;
+		Node child;
 		for (int i = 0; i < speakerList.getLength(); i++) {
-			child = (Element) speakerList.item(i);
-			if (getString("SPEAKER", child) == speaker) {
+			child = (Node) speakerList.item(i);
+			if (child.getNodeValue().equals(speaker)) {
 				actNumber++;
+			} else {
+				System.out.println("Invalid input.");
 			}
 		}
-		return actNumber.getLength();
+		return actNumber;
 	}
 
-	public static int getActNumberOf (Element root) { // default speaker is hamlet
-		String speaker = "HAMLET";
-		NodeList speakerList = root.getElementsByTagName(speaker);
-		int actNumber = 0;
-		Element child;
-		for (int i = 0; i < speakerList.getLength(); i++) {
-			child = (Element) speakerList.item(i);
-			if (getString("SPEAKER", child) == speaker) {
-				actNumber++;
-			}
-		}
-		return actNumber.getLength();
-	}
-
-	public static String searchFragment (Document doc, String fragment) {
+	public static void searchFragment (Document doc, String fragment) throws TransformerConfigurationException, XPathExpressionException {
+		Scanner input = new Scanner(System.in);
 		double startTime,endTime,time;
         startTime = System.currentTimeMillis();
         try {
@@ -68,30 +61,33 @@ public class Handler {
             XPathExpression exp = xPath.compile("/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), " + fragment + ")]");
 
             NodeList nl = (NodeList)exp.evaluate(doc.getFirstChild(), XPathConstants.NODESET);
+            endTime = System.currentTimeMillis();
+            time = (endTime - startTime)/1000;
+            System.out.println("Search performed in " + time + " seconds");
             for (int index = 0; index < nl.getLength(); index++) {
             	System.out.println("The fragment has been found in the following sentence:");
                 Node node = nl.item(index);
                 System.out.println(node.getTextContent());
+            
+	            System.out.println("Do you want to replace it? (Y/N)");
+	            String answer = input.nextLine();
+	            if (answer.equals("Y") || answer.equals("y")) {
+	            	System.out.println("Enter replacement string:");
+	            	String alt = input.nextLine();
+	            	replaceWith(doc, fragment, alt);
+	            }
             }
-            endTime = System.currentTimeMillis();
-            time = (endTime - startTime)/1000;
-            System.out.println("Search performed in " + time + " seconds");
-            System.out.println("Do you want to replace it? (Y/N)");
-            // if yes:
-            System.out.println("Enter replacement string:");
-            String alt = input.nextLine();
-            replaceWith(doc, fragment, alt);
-
+            
         } catch (Exception ex) {
             endTime = System.currentTimeMillis();
             time = (endTime - startTime)/1000;
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Sorry, fragment not found. Search performed in " + time + " seconds")
+            System.out.println("Sorry, fragment not found. Search performed in " + time + " seconds");
         }
 	}
 
-	public static void replaceWith (Document doc, String fragment, String alt) {
-		String filepath = "/project_2/";
+	public static void replaceWith (Document doc, String fragment, String alt) throws IOException, SAXException, XPathExpressionException, TransformerConfigurationException, TransformerException, ParserConfigurationException {
+		Scanner input = new Scanner(System.in);
 		XPathFactory xFactory = XPathFactory.newInstance();
         XPath xPath = xFactory.newXPath();
         XPathExpression exp = xPath.compile("/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), " + fragment + ")]");
@@ -118,28 +114,34 @@ public class Handler {
 			System.out.println("The sentence has been replaced as follows:");
 			System.out.println(sourceString);
             System.out.println("Do you want to save the changes? (Y/N)");
+            String save = input.nextLine();
             // if yes:
-            System.out.println("Enter the name of the saved file (Press ENTER to overwrite)");
-            // else don't make changes
+            if (save.equals("Y") || save.equals("y")) {
+            	System.out.println("Enter the name of the saved file (Press ENTER to overwrite)");
+            	String name = input.nextLine();
 
-            // if user makes new file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(filepath));
-			transformer.transform(source, result);
-			replaceWith(result, fragment, alt);
-            System.out.println("File saved successfully.");
-
-            // if user wants to overwrite
-            System.out.println("Do you want to overwrite the file? (Y/N)");
-            node.setTextContent(sourceString);
-            System.out.println("File saved successfully.");
-            // if not, no changes
+            	if (name.equals("")) {
+            		System.out.println("Do you want to overwrite the file? (Y/N)");
+            		String overwrite = input.nextLine();
+            		if (overwrite.equals("Y") || overwrite.equals("y")) {
+            			node.setTextContent(sourceString);
+	            		System.out.println("File saved successfully.");
+            		}
+            	} else {
+	            	TransformerFactory transformerFactory = TransformerFactory.newInstance();
+					Transformer transformer = transformerFactory.newTransformer();
+					DOMSource source = new DOMSource(doc);
+					StreamResult result = new StreamResult(new File(name));
+					transformer.transform(source, result);
+					File newFile = new File(name);
+					replaceWith(newFile, fragment, alt);
+		            System.out.println("File saved successfully.");
+            	} 
+            } 
         }
 	}
 
-	public static void replaceWith (File xml, String fragment, String alt) {
+	public static void replaceWith (File xml, String fragment, String alt) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
 		File xmlFile = xml;
 		Handler handler = new Handler();
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -173,8 +175,8 @@ public class Handler {
         }
 	}
 
-	protected String getString (String tagName, Element root) {
-        NodeList list = element.getElementsByTagName(tagName);
+	protected static String getString (String tagName, Element root) {
+        NodeList list = root.getElementsByTagName(tagName);
         if (list != null && list.getLength() > 0) {
             NodeList subList = list.item(0).getChildNodes();
 
