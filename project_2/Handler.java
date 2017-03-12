@@ -52,7 +52,9 @@ public class Handler {
 	}
 
 	public static String searchFragment (Document doc, String fragment) {
-		try {
+		double startTime,endTime,time;
+        startTime = System.currentTimeMillis();
+        try {
             XPathFactory xFactory = XPathFactory.newInstance();
             XPath xPath = xFactory.newXPath();
             XPathExpression exp = xPath.compile("/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), " + fragment + ")]");
@@ -63,10 +65,14 @@ public class Handler {
                 Node node = nl.item(index);
                 System.out.println(node.getTextContent());
             }
+            endTime = System.currentTimeMillis();
+            time = (endTime - startTime)/1000;
             System.out.println("Search performed in " + time + " seconds");
             System.out.println("Do you want to replace it? (Y/N)");
 
         } catch (Exception ex) {
+            endTime = System.currentTimeMillis();
+            time = (endTime - startTime)/1000;
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Sorry, fragment not found. Search performed in " + time + " seconds")
         }
