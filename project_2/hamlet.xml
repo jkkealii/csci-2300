@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE PLAY SYSTEM "play.dtd"> -->
-<PLAY>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- <!DOCTYPE PLAY SYSTEM "play.dtd"> --><PLAY>
   <TITLE>The Tragedy of Hamlet, Prince of Denmark</TITLE>
   <FM>
     <P>ASCII text placed in the public domain by Moby Lexical Tools, 1992.</P>
@@ -7899,4 +7897,3 @@ bodies; after which a peal of ordnance is shot off</STAGEDIR>
     </SCENE>
   </ACT>
 </PLAY>
-
