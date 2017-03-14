@@ -47,8 +47,6 @@ public class Handler {
 			}
 			if (child.getNodeName().equals("SPEAKER") && getNodeValue(child).equals(speaker)) {
 				actNumber++;
-			} else {
-				System.out.println("Invalid input.");
 			}
 		}
 		return actNumber;
@@ -72,10 +70,11 @@ public class Handler {
 		Scanner input = new Scanner(System.in);
 		double startTime,endTime,time;
         startTime = System.currentTimeMillis();
+        String lineExpression = "/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '" + fragment + "')]";
         try {
             XPathFactory xFactory = XPathFactory.newInstance();
             XPath xPath = xFactory.newXPath();
-            XPathExpression exp = xPath.compile("/PLAY/ACT/SCENE/SPEECH/LINE[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), " + fragment + ")]");
+            XPathExpression exp = xPath.compile(lineExpression);
 
             NodeList nl = (NodeList)exp.evaluate(doc.getFirstChild(), XPathConstants.NODESET);
             endTime = System.currentTimeMillis();
