@@ -35,20 +35,37 @@ public class Handler {
 		return personaList.getLength();
 	}
 
-	public static int getActNumberOf (Element root, String character) {
+	public static int getActNumberOf (Node root, String character) {
 		String speaker = character;
-		NodeList speakerList = root.getElementsByTagName("SPEAKER");
+		NodeList speakerList = root.getChildNodes();
 		int actNumber = 0;
 		Node child;
 		for (int i = 0; i < speakerList.getLength(); i++) {
-			child = (Node) speakerList.item(i);
-			if (child.getNodeValue().equals(speaker)) {
+			child = speakerList.item(i);
+			if (child instanceof Element) {
+				actNumber += getActNumberOf(child, speaker);
+			}
+			if (child.getNodeName().equals("SPEAKER") && getNodeValue(child).equals(speaker)) {
 				actNumber++;
 			} else {
 				System.out.println("Invalid input.");
 			}
 		}
 		return actNumber;
+	}
+
+	public static String getNodeValue (Node node) {
+	    StringBuffer buf = new StringBuffer();
+	    NodeList children = node.getChildNodes();
+	    for (int i = 0; i < children.getLength(); i++) {
+	        Node textChild = children.item(i);
+	        if (textChild.getNodeType() != Node.TEXT_NODE) {
+	            System.err.println("Mixed content! Skipping child element " + textChild.getNodeName());
+	            continue;
+	        }
+	        buf.append(textChild.getNodeValue());
+	    }
+	    return buf.toString();
 	}
 
 	public static void searchFragment (Document doc, String fragment) throws TransformerConfigurationException, XPathExpressionException {
@@ -134,7 +151,9 @@ public class Handler {
 					StreamResult result = new StreamResult(new File(name));
 					transformer.transform(source, result);
 					File newFile = new File(name);
+
 					replaceWith(newFile, fragment, alt);
+
 		            System.out.println("File saved successfully.");
             	} 
             } 

@@ -48,9 +48,9 @@ public class Driver {
 			System.out.println("Enter SPEAKER name, press ENTER for default (HAMLET)");
 			String speaker = input.nextLine().toUpperCase();
 			if (speaker.equals("")) {
-				System.out.println("SPEAKER [HAMLET] appears: " + handler.getActNumberOf(rootElement, "HAMLET") + " times.");
+				System.out.println("SPEAKER [HAMLET] appears: " + handler.getActNumberOf(rootElement, "HAMLET") + " time(s).");
 			} else {
-				System.out.println("SPEAKER [" + speaker + "] appears: " +handler.getActNumberOf(rootElement, speaker) + " times.");
+				System.out.println("SPEAKER [" + speaker + "] appears: " +handler.getActNumberOf(rootElement, speaker) + " time(s).");
 			}
 		} else if (function.equals("F") || function.equals("f")) {
 			System.out.println("Enter fragment to search:");
