@@ -30,7 +30,7 @@ public class Driver {
         }
         File xmlFile = new File(filename);
 		
-        Handler handler = new Handler();
+        Handler handler = new Handler(filename);
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(xmlFile);
