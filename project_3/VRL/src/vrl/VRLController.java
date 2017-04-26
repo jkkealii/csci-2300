@@ -24,16 +24,13 @@ import javafx.collections.*;
  *
  * @author lemonjello
  */
-public class VRLController {
+public class VRLController implements Initializable{
  
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
     @FXML // URL location of the FXML file that was given to the FXMLLoader
     private URL location;
-    
-    @FXML
-    private ComboBox laser_type;
     
     @FXML
     private Rectangle color_view;
@@ -118,7 +115,8 @@ public class VRLController {
     private double i_rms;
     
     
-    void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rss) {
         ObservableList<String> materials = 
         FXCollections.observableArrayList(
             "Ge",
@@ -132,7 +130,9 @@ public class VRLController {
             "SiO2 (Unpolarized)"
         );
         System.out.println(this.getClass().getSimpleName() + ".initialize");
-        material_type.setItems(materials);
+        material_type.getItems().removeAll(material_type.getItems());
+        material_type.getItems().addAll(materials);
+        material_type.getSelectionModel().select("As2S3");
         v_rms = 12.0;
     }
     
@@ -227,23 +227,27 @@ public class VRLController {
     }
     
     @FXML
-    void lengthChosen (ActionEvent event) {
+    void lengthHeightChosen (ActionEvent event) {
         double input = Double.parseDouble(acoustic_length.getText());
         if (input > 0.0 && input < 10.0) {
             length = input;
         } else {
             acoustic_length.setText("5.0");
         }
-    }
-    
-    @FXML
-    void heightChosen (ActionEvent event) {
-        double input = Double.parseDouble(acoustic_height.getText());
-        if (input > 0.0 && input < 10.0) {
-            height = input;
+        
+        double h = Double.parseDouble(acoustic_height.getText());
+        if (h > 0.0 && h < 10.0) {
+            height = h;
         } else {
             acoustic_height.setText("5.0");
         }
+    }
+    
+    @FXML
+    void voltFreqPower (ActionEvent event) {
+        voltageCalc(event);
+        frequencyChosen(event);
+        powerChosen(event);
     }
     
     @FXML
