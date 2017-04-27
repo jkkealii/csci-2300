@@ -1,198 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vrl.VRLController">
-   <children>
-      <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
-         <items>
-            <SplitPane dividerPositions="0.3679" orientation="VERTICAL">
-              <items>
-                <AnchorPane>
+<TabPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vrl.VRLController">
+   <tabs>
+      <Tab text="Experiment">
+         <content>
+            <VBox prefHeight="600.0" prefWidth="800.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+                     <items>
+                        <SplitPane dividerPositions="0.3679" orientation="VERTICAL">
+                          <items>
+                            <AnchorPane>
+                                 <children>
+                                    <VBox fillWidth="false" layoutX="20.0" layoutY="22.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="63.0" spacing="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                                             <children>
+                                                <Label layoutX="26.0" layoutY="53.0" text="Color" />
+                                                <Rectangle fx:id="color_view" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="113.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="200.0" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="100.0" spacing="23.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                                             <children>
+                                                <Label layoutX="24.0" layoutY="105.0" text="Wavelength" />
+                                                <TextField fx:id="wavelength_value" layoutX="117.0" layoutY="100.0" prefHeight="27.0" prefWidth="200.0" />
+                                                <Button mnemonicParsing="false" onAction="#wavelengthChosen" text="OK" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="20.0" layoutY="104.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="152.0" spacing="45.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="16.0" text="Material" />
+                                                <ComboBox fx:id="material_type" layoutX="139.0" layoutY="10.0" onAction="#materialChosen" prefHeight="27.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="190.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="194.0" text="Refract. Index" />
+                                                <TextField fx:id="ref_index" layoutX="113.0" layoutY="190.0" prefHeight="27.0" prefWidth="200.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="226.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                                             <children>
+                                                <Label layoutX="24.0" layoutY="105.0" text="Acoustic Vel." />
+                                                <TextField fx:id="acoustic_vel" layoutX="117.0" layoutY="100.0" prefHeight="27.0" prefWidth="200.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <VBox fillWidth="false" layoutX="20.0" layoutY="6.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="25.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="30.0" text="Q Factor" />
+                                                <TextField fx:id="q_factor" layoutX="83.0" layoutY="25.0" />
+                                                <Button layoutX="271.0" layoutY="25.0" mnemonicParsing="false" onAction="#qFactor" text="Calculate" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="62.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="40.0" text="Regime" />
+                                                <TextField fx:id="regime" layoutX="118.0" layoutY="35.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="99.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="80.0" text="Diffraction Efficiency" />
+                                                <TextField fx:id="diff_efficiency" layoutX="175.0" layoutY="75.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="20.0" layoutY="132.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="132.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="40.0" layoutY="120.0" text="Internal Diff. Angle" />
+                                                <TextField fx:id="internal_radians" layoutX="165.0" layoutY="115.0" prefHeight="27.0" prefWidth="70.0" />
+                                                <TextField fx:id="internal_degrees" layoutX="268.0" layoutY="115.0" prefHeight="27.0" prefWidth="70.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="164.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="40.0" layoutY="155.0" text="External Diff. Angle" />
+                                                <TextField fx:id="external_radians" layoutX="168.0" layoutY="150.0" prefHeight="27.0" prefWidth="70.0" />
+                                                <TextField fx:id="external_degrees" layoutX="286.0" layoutY="150.0" prefHeight="27.0" prefWidth="70.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Label layoutX="153.0" layoutY="110.0" text="Radians" />
+                                    <Label layoutX="232.0" layoutY="110.0" text="Degrees" />
+                                    <VBox fillWidth="false" layoutX="20.0" layoutY="203.0" spacing="14.0">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="10.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="15.0" text="Length of Acoustic Beam (1-10mm)" />
+                                                <TextField fx:id="acoustic_length" layoutX="250.0" layoutY="10.0" prefHeight="27.0" prefWidth="117.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="55.0" spacing="17.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="62.0" text="Height of Acoustic Beam (1-10mm)" />
+                                                <TextField fx:id="acoustic_height" layoutX="250.0" layoutY="55.0" prefHeight="27.0" prefWidth="117.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="98.0" spacing="48.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="103.0" text="Figure of Merit" />
+                                                <TextField fx:id="figure_merit" layoutX="157.0" layoutY="98.0" prefHeight="27.0" prefWidth="209.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Button layoutX="20.0" layoutY="323.0" mnemonicParsing="false" onAction="#lengthHeightChosen" text="OK" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <SplitPane dividerPositions="0.36789297658862874" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                          <items>
+                            <AnchorPane prefHeight="225.0" prefWidth="395.0">
+                                 <children>
+                                    <ImageView fitHeight="207.0" fitWidth="383.0" layoutX="10.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@experiment.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children></AnchorPane>
+                            <AnchorPane>
+                                 <children>
+                                    <LineChart fx:id="RF_graph" layoutX="-1.0" layoutY="134.0" prefHeight="240.0" prefWidth="395.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                    <Label layoutX="20.0" layoutY="5.0" prefHeight="30.0" prefWidth="176.0" text="Radio Frequency Signal" />
+                                    <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="20.0" layoutY="33.0" spacing="10.0">
+                                       <children>
+                                          <HBox layoutX="20.0" layoutY="33.0" spacing="25.0">
+                                             <children>
+                                                <HBox alignment="CENTER" layoutX="20.0" layoutY="33.0" spacing="10.0">
+                                                   <children>
+                                                      <Label layoutX="20.0" layoutY="38.0" text="DC Voltage (1-24V)" />
+                                                      <TextField fx:id="voltage" layoutX="155.0" layoutY="33.0" prefHeight="27.0" prefWidth="64.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="245.0" layoutY="35.0" spacing="10.0">
+                                                   <children>
+                                                      <Label layoutX="245.0" layoutY="38.0" text="Vrms" />
+                                                      <TextField fx:id="vrms" layoutX="296.0" layoutY="35.0" prefHeight="27.0" prefWidth="64.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="20.0" layoutY="62.0" spacing="10.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="69.0" text="Frequency (1-1000MHz)" />
+                                                <TextField fx:id="frequency" layoutX="185.0" layoutY="62.0" prefHeight="27.0" prefWidth="64.0" />
+                                                <Button mnemonicParsing="false" onAction="#voltFreqPower" text="OK" />
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutX="20.0" layoutY="92.0" spacing="45.0">
+                                             <children>
+                                                <HBox alignment="CENTER" layoutX="20.0" layoutY="92.0" spacing="10.0">
+                                                   <children>
+                                                      <Label layoutX="20.0" layoutY="97.0" text="RF Power (1-2W)" />
+                                                      <TextField fx:id="rf_power" layoutX="149.0" layoutY="92.0" prefHeight="27.0" prefWidth="64.0" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" layoutX="245.0" layoutY="93.0" spacing="10.0">
+                                                   <children>
+                                                      <Label layoutX="245.0" layoutY="97.0" text="Irms" />
+                                                      <TextField fx:id="irms" layoutX="292.0" layoutY="93.0" prefHeight="27.0" prefWidth="64.0" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+      <Tab text="Theory">
+        <content>
+          <AnchorPane>
+               <children>
+                  <VBox prefHeight="580.0" prefWidth="771.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox fillWidth="false" layoutX="20.0" layoutY="22.0" spacing="10.0">
+                        <TextArea prefHeight="133.0" prefWidth="800.0" text="Acousto-optics describes the interaction of sound with light . A soundwave unleashed on an optical medium &#10;(crystal) using a piezo-electric transducer creates a disturbance in the refractive index of the medium. Any incident &#10;laser beam will be diffracted by this grating, generally giving a number of diffracted beams, as shown in Figure 1.  &#10;The sound can then control a light beam hitting the crystal. This fact, known as Acousto-Optical(AO) effect is used &#10;in various devices, such as beam deflectors, optical modulators, filters, isolators and spectrum analyzers, among &#10;others.&#10;" />
+                        <HBox>
                            <children>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="63.0" spacing="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
-                                 <children>
-                                    <Label layoutX="26.0" layoutY="53.0" text="Color" />
-                                    <Rectangle fx:id="color_view" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="113.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="200.0" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="100.0" spacing="23.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
-                                 <children>
-                                    <Label layoutX="24.0" layoutY="105.0" text="Wavelength" />
-                                    <TextField fx:id="wavelength_value" layoutX="117.0" layoutY="100.0" prefHeight="27.0" prefWidth="200.0" />
-                                    <Button mnemonicParsing="false" onAction="#wavelengthChosen" text="OK" />
-                                 </children>
-                              </HBox>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Diagram1.PNG" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Diagram2.PNG" />
+                                 </image>
+                              </ImageView>
                            </children>
-                        </VBox>
-                        <VBox layoutX="20.0" layoutY="104.0" spacing="10.0">
+                        </HBox>
+                        <AnchorPane prefHeight="317.0" prefWidth="800.0">
                            <children>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="152.0" spacing="45.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
+                              <VBox prefHeight="317.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label layoutX="20.0" layoutY="16.0" text="Material" />
-                                    <ComboBox fx:id="material_type" layoutX="139.0" layoutY="10.0" onAction="#materialChosen" prefHeight="27.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <TextArea prefHeight="193.0" prefWidth="800.0" text="Since optical frequencies are much higher than acoustic frequencies ( versus ,respectively), the crystal can be &#10;considered a static and homogeneous medium. According to the interaction geometry between light and sound, &#10;two different AO regimes can be distinguished:&#10; Raman-Nath regime. This effect occurs when light strikes perpendicularly to thedirection of propagation of the &#10;    sound on the glass.   Different sidebands are then generated, corresponding to the different diffraction orders.&#10; Bragg regime. In this interaction geometry, only one diffraction order (m = 1) is generated, along with the &#10;    unavoidable DC    (Direct Current, m = 0) central spot. The diffraction efficiency (e.g. the optical power &#10;    accumulated on the diffraction order) is then maximized compared to the Raman-Nath regime.&#10;In practice, the Klein and Cook parameter (also known as Quality Factor) is used to distinguish both AO regimes: &#10;(See Equation 1) &#10;When the interaction corresponds to Raman-Nath regime, and several diffraction orders areproduced. On the &#10;other hand, the interaction follows the Bragg regime when Q&gt;&gt; 1.   The application of laws of conservation of &#10;energy and momentum produce in a simple form thewell-known Bragg equation: Equation [2]  &#10;Where is the angle of internal deflection within the crystal (also called the Bragg angle), and the remaining &#10;parameters were already described.  Since the angles are very small, we can typically use the approximation: &#10;(in radians) See Equation [3]&#10;The external deflection angle (at the exit of the glass) is then: See Equation [4]&#10;The diffraction efficiency (D.E.) is a measureof how much optical power is diffracted into a designated direction &#10;compared to the power incident onto thediffractive element. Under Bragg regime, the diffraction efficiency can be &#10;calculated.  See Equation [5]" />
+                                    <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="800.0">
+                                       <children>
+                                          <ImageView fitHeight="92.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Eq1.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="115.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Eq2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="139.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Eq3.PNG" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <ImageView fitHeight="226.0" fitWidth="376.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Eq4.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="133.0" fitWidth="355.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Eq5.PNG" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="190.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="194.0" text="Refract. Index" />
-                                    <TextField fx:id="ref_index" layoutX="113.0" layoutY="190.0" prefHeight="27.0" prefWidth="200.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="226.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="80.0">
-                                 <children>
-                                    <Label layoutX="24.0" layoutY="105.0" text="Acoustic Vel." />
-                                    <TextField fx:id="acoustic_vel" layoutX="117.0" layoutY="100.0" prefHeight="27.0" prefWidth="200.0" />
-                                 </children>
-                              </HBox>
+                              </VBox>
                            </children>
-                        </VBox>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane>
-                     <children>
-                        <VBox fillWidth="false" layoutX="20.0" layoutY="6.0" spacing="10.0">
-                           <children>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="25.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="30.0" text="Q Factor" />
-                                    <TextField fx:id="q_factor" layoutX="83.0" layoutY="25.0" />
-                                    <Button layoutX="271.0" layoutY="25.0" mnemonicParsing="false" onAction="#qFactor" text="Calculate" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="62.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="40.0" text="Regime" />
-                                    <TextField fx:id="regime" layoutX="118.0" layoutY="35.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="99.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="80.0" text="Diffraction Efficiency" />
-                                    <TextField fx:id="diff_efficiency" layoutX="175.0" layoutY="75.0" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="20.0" layoutY="132.0" spacing="10.0">
-                           <children>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="132.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="40.0" layoutY="120.0" text="Internal Diff. Angle" />
-                                    <TextField fx:id="internal_radians" layoutX="165.0" layoutY="115.0" prefHeight="27.0" prefWidth="70.0" />
-                                    <TextField fx:id="internal_degrees" layoutX="268.0" layoutY="115.0" prefHeight="27.0" prefWidth="70.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="164.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="40.0" layoutY="155.0" text="External Diff. Angle" />
-                                    <TextField fx:id="external_radians" layoutX="168.0" layoutY="150.0" prefHeight="27.0" prefWidth="70.0" />
-                                    <TextField fx:id="external_degrees" layoutX="286.0" layoutY="150.0" prefHeight="27.0" prefWidth="70.0" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <Label layoutX="153.0" layoutY="110.0" text="Radians" />
-                        <Label layoutX="232.0" layoutY="110.0" text="Degrees" />
-                        <VBox fillWidth="false" layoutX="20.0" layoutY="203.0" spacing="14.0">
-                           <children>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="10.0" spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="15.0" text="Length of Acoustic Beam (1-10mm)" />
-                                    <TextField fx:id="acoustic_length" layoutX="250.0" layoutY="10.0" prefHeight="27.0" prefWidth="117.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="55.0" spacing="17.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="62.0" text="Height of Acoustic Beam (1-10mm)" />
-                                    <TextField fx:id="acoustic_height" layoutX="250.0" layoutY="55.0" prefHeight="27.0" prefWidth="117.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="98.0" spacing="48.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="103.0" text="Figure of Merit" />
-                                    <TextField fx:id="figure_merit" layoutX="157.0" layoutY="98.0" prefHeight="27.0" prefWidth="209.0" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <Button layoutX="20.0" layoutY="323.0" mnemonicParsing="false" onAction="#lengthHeightChosen" text="OK" />
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-            <SplitPane dividerPositions="0.36789297658862874" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane prefHeight="225.0" prefWidth="395.0" />
-                <AnchorPane>
-                     <children>
-                        <LineChart fx:id="RF_graph" layoutX="-1.0" layoutY="134.0" prefHeight="240.0" prefWidth="395.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
-                        <Label layoutX="20.0" layoutY="5.0" prefHeight="30.0" prefWidth="176.0" text="Radio Frequency Signal" />
-                        <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="20.0" layoutY="33.0" spacing="10.0">
-                           <children>
-                              <HBox layoutX="20.0" layoutY="33.0" spacing="25.0">
-                                 <children>
-                                    <HBox alignment="CENTER" layoutX="20.0" layoutY="33.0" spacing="10.0">
-                                       <children>
-                                          <Label layoutX="20.0" layoutY="38.0" text="DC Voltage (1-24V)" />
-                                          <TextField fx:id="voltage" layoutX="155.0" layoutY="33.0" prefHeight="27.0" prefWidth="64.0" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" layoutX="245.0" layoutY="35.0" spacing="10.0">
-                                       <children>
-                                          <Label layoutX="245.0" layoutY="38.0" text="Vrms" />
-                                          <TextField fx:id="vrms" layoutX="296.0" layoutY="35.0" prefHeight="27.0" prefWidth="64.0" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutX="20.0" layoutY="62.0" spacing="10.0">
-                                 <children>
-                                    <Label layoutX="20.0" layoutY="69.0" text="Frequency (1-1000MHz)" />
-                                    <TextField fx:id="frequency" layoutX="185.0" layoutY="62.0" prefHeight="27.0" prefWidth="64.0" />
-                                    <Button mnemonicParsing="false" onAction="#voltFreqPower" text="OK" />
-                                 </children>
-                              </HBox>
-                              <HBox layoutX="20.0" layoutY="92.0" spacing="45.0">
-                                 <children>
-                                    <HBox alignment="CENTER" layoutX="20.0" layoutY="92.0" spacing="10.0">
-                                       <children>
-                                          <Label layoutX="20.0" layoutY="97.0" text="RF Power (1-2W)" />
-                                          <TextField fx:id="rf_power" layoutX="149.0" layoutY="92.0" prefHeight="27.0" prefWidth="64.0" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" layoutX="245.0" layoutY="93.0" spacing="10.0">
-                                       <children>
-                                          <Label layoutX="245.0" layoutY="97.0" text="Irms" />
-                                          <TextField fx:id="irms" layoutX="292.0" layoutY="93.0" prefHeight="27.0" prefWidth="64.0" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-         </items>
-      </SplitPane>
-   </children>
-</VBox>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="About">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea layoutX="-24.0" layoutY="55.0" prefHeight="200.0" prefWidth="200.0" text="Team Members: Nick Markunas, Josh Kuroda, Jan Lutter&#10;Created: April 27th 2017&#10;Class: Object Oriented Program Design&#10;Saint Louis University Madrid&#10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>

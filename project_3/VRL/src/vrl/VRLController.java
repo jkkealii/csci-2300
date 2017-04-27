@@ -5,7 +5,6 @@
  */
 package vrl;
 
-import java.awt.Color;
 import javafx.scene.paint.Paint;
 import java.util.*;
 import java.lang.*;
@@ -24,13 +23,7 @@ import javafx.collections.*;
  *
  * @author lemonjello
  */
-public class VRLController implements Initializable{
- 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
-
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+public class VRLController implements Initializable {
     
     @FXML
     private Rectangle color_view;
