@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+  <tabs>
+    <Tab text="Experiment">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+    <Tab text="Theory">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextArea editable="false" layoutY="2.0" prefHeight="368.0" prefWidth="580.0" text="Acousto-optics describes the interaction of sound with light (AA Opto-Electronic, 2017). &#10;A soundwave unleashed on an optical medium (crystal) using a piezo-electric transducer creates a &#10;disturbance in the refractive index of the medium. Any incident laser beam will be diffracted by this&#10;grating, generally giving a number of diffracted beams, as shown in Figure 1.  The sound can then control &#10;a light beam hitting the crystal. This fact, known as Acousto-Optical(AO) effect is used in various devices, &#10;such as beam deflectors, optical modulators, filters, isolators and spectrum analyzers, among others.&#10;a) Raman-Nath regime&#10;b) Bragg regime&#10;c) &#10;d)Figure &#10;1. AO interaction layout under &#10;a) Raman-Nath regime and b) Bragg regime. &#10;Laser beamoutput after the AO material on &#10;c) Raman-Nath regime and &#10;d) Bragg regime&#10;Since optical frequencies are much higher than acoustic frequencies ( versus ,respectively), the crystal can &#10;be considered a static and homogeneous medium. According to the interaction geometry between light &#10;and sound, two different AO regimes can be distinguished: Raman-Nath regime. This effect occurs when&#10; light strikes perpendicularly to thedirection of propagation of the sound on the glass. Different sidebands &#10;are then generated, corresponding to the different diffraction orders ( Bragg regime. In this interaction &#10;geometry, only one diffraction order (m = 1) isgenerated, along with the unavoidable DC (Direct Current, m = 0) &#10;central spot. The diffraction efficiency (e.g. the optical power accumulated on the diffraction order) is &#10;then maximized compared to the Raman-Nath regime.  In practice, the Klein and Cook parameter &#10;(also known as Quality Factor) is used to distinguishboth AO regimes:[1]Where is optical wavelength &#10;of the incident laser beam is length of the transduceris the wavelength of the acoustic wave is the &#10;acoustic frequency is the acoustic velocity is the refraction index of the crystal.  When the interaction &#10;corresponds to Raman-Nath regime, and several diffraction orders areproduced. On the other hand, &#10;the interaction follows the Bragg regime when.   The application of laws of conservation of energy and &#10;momentum produce in a simple form thewell-known Bragg equation:[2]  Where is the angle of internal&#10;deflection within the crystal (also called the Bragg angle), and theremaining parameters were already &#10;described.  Since the angles are very small, we can typically usethe approximation: (in radians) [3]The&#10;external deflection angle (at the exit of the glass) is then: [4]The diffraction efficiency (D.E.) is a measure&#10;of how much optical power is diffracted into a designated direction compared to the power incident &#10;onto the diffractive element. Under Braggregime, the diffraction efficiency can be calculated as:&#10;√ √ [5]Where is the maximum intensity of the incident optical beam is the light intensity on the first &#10;diffraction order (m = 1) is the acoustic power is the acousto-optic figure of merit for the crystalH is &#10;the height of the acoustic beamL is the length of the acoustic beam is the optical wavelength of the &#10;incident laser beam" />
+               </children>
+            </AnchorPane>
+         </content>
+    </Tab>
+  </tabs>
+</TabPane>
